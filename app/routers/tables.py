@@ -4,6 +4,7 @@ from typing import Annotated
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-
-
 router = APIRouter(prefix='/tables', tags=['tables'])
+
+
+
