@@ -1,10 +1,8 @@
+from __future__ import annotations
 from datetime import datetime
-
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
 from app.backend.base import Base
-from app.models.table import Table
 
 
 class Reservation(Base):
@@ -16,7 +14,7 @@ class Reservation(Base):
     reservation_time: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     duration_minutes: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    table: Mapped['Table'] = relationship(back_populates='reservations')
+    table: Mapped["Table"] = relationship(back_populates="reservations")
 
     def __repr__(self) -> str:
         return (f"Бронирование(id={self.id}, клиент={self.customer_name}, "

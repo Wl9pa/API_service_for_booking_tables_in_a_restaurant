@@ -1,9 +1,8 @@
+from __future__ import annotations
 from typing import List
 from sqlalchemy import Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.backend.base import Base
-from sqlalchemy.orm import relationship, Mapped, mapped_column
-
-from app.models.reservation import Reservation
 
 
 class Table(Base):
@@ -14,11 +13,11 @@ class Table(Base):
     seats: Mapped[int] = mapped_column(Integer, nullable=False)
     location: Mapped[str] = mapped_column(String(50), nullable=False)
 
-    reservations: Mapped[List['Reservation']] = relationship(
-        back_populates='table',
+    # Используем строковый литерал вместо импорта
+    reservations: Mapped[List["Reservation"]] = relationship(
+        back_populates="table",
         cascade="all, delete-orphan"
     )
 
     def __repr__(self) -> str:
         return f"Стол(id={self.id}, наименование={self.name}, места={self.seats})"
-
